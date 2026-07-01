@@ -1,0 +1,14 @@
+[project]
+name = "robeex-ai-drone-python-examples"
+version = "0.1.0"
+description = "RoBeeX AI Drone Python Examples"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "robeex-ai-drone-api>=0.2.11",
+    "numpy>=2.4.6",
+    "opencv-python>=4.13.0.92",
+    "pyautogui>=0.9.54",
+    "cvzone>=2.0.0",
+    "mediapipe>=0.10.35",
+]
