@@ -31,7 +31,7 @@ def main():
         print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
         drone.wait_for_telemetry()
         cap = drone.VideoCapture()
-        cap.open(FrameSize.SIZE_HD, 16)
+        cap.open(FrameSize.SIZE_640x480, 16)
 
     if not cap.isOpened():
         print("Error: Could not open camera.")
