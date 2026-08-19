@@ -11,7 +11,7 @@ def parse_args():
     parser.add_argument(
         "-f", "--frame_size",
         type=int,
-        choices=range(4, 12),
+        choices=range(4, 14),
         default=7,
         help="Frame size (integer 4–11). Corresponds to FrameSize enum values.",
         metavar="[4-11]"
@@ -24,6 +24,12 @@ def parse_args():
         default=15,
         help="JPEG quality (1–63). Lower is higher compression.",
         metavar="[1-63]"
+    )
+
+    parser.add_argument(
+        "--blur",
+        action="store_true",
+        help="Apply median and Gaussian blur to video frames."
     )
 
     return parser.parse_args()
@@ -54,7 +60,6 @@ def main():
     started_at = time.time()
 
     # TEST_TIME_S = 10
-#
     # while stream.isOpened() and time.time() - started_at < TEST_TIME_S:
     while stream.isOpened():
         success, frame = stream.read()
@@ -63,6 +68,10 @@ def main():
         if not success:
             bad_count += 1
             continue
+
+        if args.blur:
+            frame = cv2.medianBlur(frame, 9)
+            frame = cv2.GaussianBlur(frame, (7, 7), 0)
 
         # Report packet loss every 1 second
         now = time.time()
@@ -85,4 +94,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
