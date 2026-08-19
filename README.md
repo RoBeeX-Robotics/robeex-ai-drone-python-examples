@@ -15,21 +15,47 @@ generating flight paths, and running computer-vision models on live video.
 
 ## Setup
 
-Python 3.11+ is required. From the repository root:
+Python 3.11+ is required. From the repository root, choose either `uv` or
+`pip`.
+
+Using `uv`:
 
 ```bash
 uv sync
 ```
 
-Commands below use `uv run python`. Most drone examples wait for telemetry, so
-the computer must be connected to the drone. Video and 3D programs need a
-graphical desktop.
+Using `pip`:
+
+```bash
+pip install -r requirements.txt
+```
+
+Using `pip` with *virtual environment*:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+Commands below use `uv run python`. If you installed with `pip`, replace
+`uv run python` with `python`. Most drone examples wait for telemetry, so the
+computer must be connected to the drone. Video and 3D programs need a graphical
+desktop.
 
 `pyproject.toml` declares the RoBeeX AI Drone API, NumPy, OpenCV, PyAutoGUI, CVZone, and
 MediaPipe. Advanced examples also use packages that are not currently declared:
 
+Using `uv`:
+
 ```bash
 uv pip install ultralytics torch open3d transformers pyvista freetype-py websocket-server
+```
+
+Using `pip`:
+
+```bash
+python -m pip install ultralytics torch open3d transformers pyvista freetype-py websocket-server
 ```
 
 - Ultralytics/Torch run YOLO26; Open3D renders point clouds and voxels.
@@ -37,10 +63,12 @@ uv pip install ultralytics torch open3d transformers pyvista freetype-py websock
 - PyVista renders AprilTag pose, FreeType reads font outlines, and
   `websocket-server` publishes telemetry/tag JSON.
 
-YOLO scripts expect the included `.pt` files in the repository root. Depth
-Anything downloads `depth-anything/Depth-Anything-V2-Small-hf` on first use.
-The two object detection scripts explicitly require CUDA; depth scripts select
-CUDA, Apple MPS, or CPU automatically.
+YOLO `.pt` weight files are not included in the repository. Ultralytics
+automatically downloads the required model the first time each YOLO script is
+run, so an internet connection is required on first use. Depth Anything also
+downloads `depth-anything/Depth-Anything-V2-Small-hf` on first use. The two
+object detection scripts explicitly require CUDA; depth scripts select CUDA,
+Apple MPS, or CPU automatically.
 
 ## Camera and general examples
 

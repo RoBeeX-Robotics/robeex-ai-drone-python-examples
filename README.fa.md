@@ -15,21 +15,47 @@
 
 ## راه‌اندازی
 
-Python 3.11 یا جدیدتر لازم است. در ریشه‌ی repository اجرا کنید:
+Python 3.11 یا جدیدتر لازم است. یکی از روش‌های `uv` یا `pip` را انتخاب و در
+ریشه‌ی repository اجرا کنید.
+
+با استفاده از `uv`:
 
 ```bash
 uv sync
 ```
 
-دستورهای این سند از `uv run python` استفاده می‌کنند. بیشتر نمونه‌های پهپاد منتظر
-telemetry می‌مانند؛ بنابراین کامپیوتر باید به پهپاد متصل باشد. برنامه‌های ویدیو و
-نمایش سه‌بعدی نیز به محیط desktop گرافیکی نیاز دارند.
+با استفاده از `pip`:
+
+```bash
+pip install -r requirements.txt
+```
+
+با استفاده از `pip` و *virtual environment*:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+دستورهای این سند از `uv run python` استفاده می‌کنند. اگر packageها را با `pip`
+نصب کرده‌اید، `uv run python` را با `python` جایگزین کنید. بیشتر نمونه‌های پهپاد
+منتظر telemetry می‌مانند؛ بنابراین کامپیوتر باید به پهپاد متصل باشد. برنامه‌های
+ویدیو و نمایش سه‌بعدی نیز به محیط desktop گرافیکی نیاز دارند.
 
 وابستگی‌های اصلی در `pyproject.toml` تعریف شده‌اند. نمونه‌های پیشرفته به packageهای
 زیر هم نیاز دارند که در حال حاضر در آن فایل تعریف نشده‌اند:
 
+با استفاده از `uv`:
+
 ```bash
 uv pip install ultralytics torch open3d transformers pyvista freetype-py websocket-server
+```
+
+با استفاده از `pip`:
+
+```bash
+python -m pip install ultralytics torch open3d transformers pyvista freetype-py websocket-server
 ```
 
 - Ultralytics و Torch مدل‌های YOLO26 را اجرا می‌کنند؛ Open3D برای point cloud و voxel است.
@@ -37,10 +63,12 @@ uv pip install ultralytics torch open3d transformers pyvista freetype-py websock
 - PyVista نمایش pose مربوط به AprilTag، FreeType خواندن outline فونت و
   `websocket-server` انتشار telemetry و JSON تگ را انجام می‌دهند.
 
-اسکریپت‌های YOLO فایل‌های `.pt` موجود در ریشه‌ی repository را می‌خوانند. Depth
-Anything در اولین اجرا مدل `depth-anything/Depth-Anything-V2-Small-hf` را دانلود
-می‌کند. دو اسکریپت object detection در وضعیت فعلی صراحتاً به CUDA نیاز دارند؛
-اسکریپت‌های depth به‌صورت خودکار CUDA، Apple MPS یا CPU را انتخاب می‌کنند.
+فایل‌های وزن `.pt` مربوط به YOLO در repository قرار ندارند. Ultralytics مدل مورد
+نیاز هر اسکریپت YOLO را هنگام اولین اجرا به‌صورت خودکار دانلود می‌کند؛ بنابراین
+برای اولین اجرا اتصال به اینترنت لازم است. Depth Anything نیز در اولین اجرا مدل
+`depth-anything/Depth-Anything-V2-Small-hf` را دانلود می‌کند. دو اسکریپت object
+detection در وضعیت فعلی صراحتاً به CUDA نیاز دارند؛ اسکریپت‌های depth به‌صورت
+خودکار CUDA، Apple MPS یا CPU را انتخاب می‌کنند.
 
 ## دوربین و نمونه‌های عمومی
 

@@ -15,21 +15,46 @@ telemetry، وإنشاء مسارات الطيران، وتشغيل نماذج c
 
 ## الإعداد
 
-يتطلب المشروع Python 3.11 أو أحدث. نفّذ من جذر repository:
+يتطلب المشروع Python 3.11 أو أحدث. اختر `uv` أو `pip` ونفّذ من جذر repository.
+
+باستخدام `uv`:
 
 ```bash
 uv sync
 ```
 
-تستخدم الأوامر أدناه `uv run python`. تنتظر معظم أمثلة الطائرة وصول telemetry،
-لذلك يجب أن يكون الحاسوب متصلاً بالطائرة. وتتطلب تطبيقات الفيديو والعرض ثلاثي
-الأبعاد بيئة desktop رسومية.
+باستخدام `pip`:
+
+```bash
+pip install -r requirements.txt
+```
+
+باستخدام `pip` مع *virtual environment*:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+تستخدم الأوامر أدناه `uv run python`. إذا ثبّتَّ الحزم باستخدام `pip`، فاستبدل
+`uv run python` بـ `python`. تنتظر معظم أمثلة الطائرة وصول telemetry، لذلك يجب
+أن يكون الحاسوب متصلاً بالطائرة. وتتطلب تطبيقات الفيديو والعرض ثلاثي الأبعاد بيئة
+desktop رسومية.
 
 يعرّف `pyproject.toml` الاعتماديات الأساسية. تحتاج الأمثلة المتقدمة أيضاً إلى
 الحزم التالية، وهي غير معرّفة فيه حالياً:
 
+باستخدام `uv`:
+
 ```bash
 uv pip install ultralytics torch open3d transformers pyvista freetype-py websocket-server
+```
+
+باستخدام `pip`:
+
+```bash
+python -m pip install ultralytics torch open3d transformers pyvista freetype-py websocket-server
 ```
 
 - يشغّل Ultralytics وTorch نماذج YOLO26، ويعرض Open3D الـ point cloud والـ voxels.
@@ -37,10 +62,12 @@ uv pip install ultralytics torch open3d transformers pyvista freetype-py websock
 - يُستخدم PyVista لعرض pose الخاص بـ AprilTag، وFreeType لقراءة font outlines،
   و`websocket-server` لنشر telemetry وبيانات التاغ بصيغة JSON.
 
-تتوقع سكربتات YOLO وجود ملفات `.pt` المرفقة في جذر repository. يحمّل Depth
-Anything النموذج `depth-anything/Depth-Anything-V2-Small-hf` عند أول تشغيل.
-يتطلب سكربتا object detection حالياً CUDA بشكل صريح، بينما تختار سكربتات depth
-تلقائياً بين CUDA وApple MPS وCPU.
+ملفات أوزان YOLO ذات الامتداد `.pt` غير مضمّنة في repository. يحمّل Ultralytics
+النموذج المطلوب تلقائياً عند تشغيل كل سكربت YOLO للمرة الأولى، لذلك يلزم اتصال
+بالإنترنت عند أول استخدام. يحمّل Depth Anything أيضاً النموذج
+`depth-anything/Depth-Anything-V2-Small-hf` عند أول تشغيل. يتطلب سكربتا object
+detection حالياً CUDA بشكل صريح، بينما تختار سكربتات depth تلقائياً بين CUDA
+وApple MPS وCPU.
 
 ## الكاميرا والأمثلة العامة
 
