@@ -40,7 +40,7 @@ def flight():
     drone.rc.nav.disarm()
 
 def main():
-    print('wait for telm ...')
+    print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
     drone.wait_for_telemetry()
     print('connecting established !')
 

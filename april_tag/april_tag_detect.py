@@ -289,7 +289,7 @@ def main():
         cap.open(frame_size=FrameSize.SIZE_640x480, jpeg_quality=15)
         # cap.open(frame_size=FrameSize.SIZE_1024x768, jpeg_quality=15)
 
-    print('wait for telm ...')
+    print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
     drone.wait_for_telemetry()
     print('connecting established !')
     drone.rc.nav.set_mode()

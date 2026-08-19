@@ -35,7 +35,7 @@ async def flight(ctx, do_flight):
 
     if do_flight:
         await drone.rc.nav.disarm()
-        print('connecting ... ')
+        print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
         await drone.wait_for_telemetry()
         print('done')
         await drone.rc.nav.disarm()

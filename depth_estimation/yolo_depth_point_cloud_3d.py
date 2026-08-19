@@ -42,6 +42,7 @@ def main():
         cap.set(cv2.CAP_PROP_FRAME_HEIGHT, height)
     else:
         drone = RobeexAIDrone()
+        print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
         drone.wait_for_telemetry()
         cap = drone.VideoCapture()
         cap.open(FrameSize.SIZE_640x480, 16)

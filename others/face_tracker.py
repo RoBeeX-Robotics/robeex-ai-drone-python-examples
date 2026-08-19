@@ -15,7 +15,7 @@ TODO: model selection based on args
 """
 face_detector = FaceDetector(0.5, 0)
 
-print('wait for telm ...')
+print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
 drone.wait_for_telemetry()
 print('connecting established !')
 

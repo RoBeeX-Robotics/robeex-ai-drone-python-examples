@@ -94,7 +94,7 @@ def update_click_state(roll_degrees: float, click_is_armed: bool) -> bool:
 def control_mouse() -> None:
     drone = RobeexAIDrone()
 
-    print("Waiting for drone connection...")
+    print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
     drone.wait_for_telemetry()
     previous_yaw = drone.rc.telemetry_data.wz
     accumulated_yaw = 0.0

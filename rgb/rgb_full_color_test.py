@@ -13,7 +13,7 @@ def set_color_by_hue(hue: int, index: int):
     print(f"Index: {index} | Hue: {hue} => RGB: {rgb_color}")
 
 def main():
-    print('wait for telm ...')
+    print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
     drone.wait_for_telemetry()
     print('connecting established !')
 
@@ -26,4 +26,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

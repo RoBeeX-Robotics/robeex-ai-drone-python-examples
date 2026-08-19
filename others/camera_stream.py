@@ -42,7 +42,7 @@ def main():
     drone = RobeexAIDrone()
     stream = drone.VideoCapture()
 
-    print("Wait for telemetry ...")
+    print("Waiting for telemetry. Please connect your PC to the drone's Wi-Fi network.")
     drone.wait_for_telemetry()
 
     # Map frame_size integer to FrameSize enum
