@@ -225,6 +225,27 @@ decompose the bundled JetBrains Mono Nerd Font outline for hard-coded character
 `S`, samples line/quadratic curves, normalizes them to 0.75 units, and writes
 `text-cords.pkl`. It has no flags; font, character, and precision are source values.
 
+## QR code examples
+
+Both examples use OpenCV's `QRCodeDetector` and accept `-c` / `--cam`: use
+`robeex` (the default) for the drone camera or a numeric webcam index such as
+`0`. Press `Esc` to exit.
+
+```bash
+uv run python qrcode/qr_code_detection.py [-c CAMERA]
+uv run python qrcode/qr_code_pose_estimation.py [-c CAMERA]
+```
+
+- [qr_code_detection.py](qrcode/qr_code_detection.py) detects and decodes
+  multiple QR codes, outlines each code, marks its pixel center, and prints and
+  overlays non-empty decoded data.
+- [qr_code_pose_estimation.py](qrcode/qr_code_pose_estimation.py) additionally
+  estimates each code's pose with `SOLVEPNP_IPPE_SQUARE`, draws coordinate axes,
+  and displays camera-frame X/Y/Z position and straight-line distance in
+  centimeters. It assumes an 11.5 cm QR-code side and uses the matching camera
+  calibration file from `april_tag/`. Calibrate your own camera and update
+  `CALIBRATION_PATH` for accurate measurements.
+
 ## AprilTag / ArUco examples
 
 These use OpenCV `cv2.aruco`. Run detection from `april_tag/` because calibration

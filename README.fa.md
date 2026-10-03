@@ -229,6 +229,27 @@ cd ..
 را sample و به 0.75 واحد normalize می‌کند و در `text-cords.pkl` می‌نویسد. flag ندارد؛
 فونت، کاراکتر و precision باید در source تغییر کنند.
 
+## نمونه‌های QR code
+
+هر دو نمونه از `QRCodeDetector` در OpenCV استفاده می‌کنند و آرگومان `-c` یا
+`--cam` را می‌پذیرند: مقدار پیش‌فرض `robeex` دوربین پهپاد را انتخاب می‌کند و یک
+index عددی مانند `0` webcam را. برای خروج کلید `Esc` را بزنید.
+
+```bash
+uv run python qrcode/qr_code_detection.py [-c CAMERA]
+uv run python qrcode/qr_code_pose_estimation.py [-c CAMERA]
+```
+
+- [qr_code_detection.py](qrcode/qr_code_detection.py) چند QR code را تشخیص می‌دهد
+  و decode می‌کند، دور هرکدام کادر می‌کشد، مرکز pixel آن را علامت می‌زند و داده‌ی
+  decodeشده‌ی غیرخالی را چاپ و روی تصویر نمایش می‌دهد.
+- [qr_code_pose_estimation.py](qrcode/qr_code_pose_estimation.py) علاوه بر این، با
+  `SOLVEPNP_IPPE_SQUARE` pose هر QR code را تخمین می‌زند، محورهای مختصات را رسم
+  می‌کند و موقعیت X/Y/Z در دستگاه مختصات دوربین و فاصله‌ی مستقیم را برحسب
+  سانتی‌متر نمایش می‌دهد. این برنامه طول ضلع QR code را 11.5 سانتی‌متر فرض می‌کند
+  و فایل calibration متناسب با دوربین را از `april_tag/` می‌خواند. برای اندازه‌گیری
+  دقیق، دوربین خود را calibrate و مقدار `CALIBRATION_PATH` را به‌روز کنید.
+
 ## نمونه‌های AprilTag / ArUco
 
 این نمونه‌ها از `cv2.aruco` استفاده می‌کنند. چون مسیر calibration نسبی است، برنامه‌های
